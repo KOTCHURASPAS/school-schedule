@@ -1,4 +1,4 @@
-var curDate = '2023, September, 04 08:25';
+var curDate = '2023, September, 04 09:05:00';
 
 function ZeroBelow(chislo) {
 	chislo = String(chislo)
