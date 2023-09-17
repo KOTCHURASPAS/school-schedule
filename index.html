@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>ШКОЛЬНОЕ РАСПИСАНИЕ</title>
+  <link rel="stylesheet" href="bulma.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="jquery.js"></script>
+  <script src="data.js"></script>
+  <script src="index-js.js"></script>
+</head>
+<body>
+  <div class="container py-4">
+    <center>
+      <div class="box">
+        <p class="title is-1">Текущее время:</p>
+        <p class="title is-2" id="currentTime">Подсчёт...</p>
+        <p class="title is-1">Текущий урок:</p>
+        <p class="title is-1" id="currentLesson">Подсчёт...</p>
+      </div>
+    </center>
+    <p class='pt-3'></p>
+    <div class="box">
+      <div class="columns">
+        <div class="column">
+          <center><p class="title is-5" id="prevMonthName">Подсчёт...</p></center>
+          <p class="pt-3"></p>
+          <table class='table is-striped is-fullwidth is-bordered'>
+            <thead>
+              <tr>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th class="has-text-danger">Сб</th>
+                <th class="has-text-danger">Вс</th>
+              </tr>
+            </thead>
+            <tbody id="prevMonthCalendar"></tbody>
+          </table>
+        </div>
+        <div class="column">
+          <center><p class="title is-5" id="curMonthName">Подсчёт...</p></center>
+          <p class="pt-3"></p>
+          <table class='table is-striped is-fullwidth is-bordered'>
+            <thead>
+              <tr>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th class="has-text-danger">Сб</th>
+                <th class="has-text-danger">Вс</th>
+              </tr>
+            </thead>
+            <tbody id="curMonthCalendar"></tbody>
+          </table>
+        </div>
+        <div class="column">
+          <center><p class="title is-5" id="nextMonthName">Подсчёт...</p></center>
+          <p class="pt-3"></p>
+          <table class='table is-striped is-fullwidth is-bordered'>
+            <thead>
+              <tr>
+                <th>Пн</th>
+                <th>Вт</th>
+                <th>Ср</th>
+                <th>Чт</th>
+                <th>Пт</th>
+                <th class="has-text-danger">Сб</th>
+                <th class="has-text-danger">Вс</th>
+              </tr>
+            </thead>
+            <tbody id="nextMonthCalendar"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
