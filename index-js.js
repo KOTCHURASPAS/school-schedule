@@ -15,7 +15,6 @@ function daysInMonth(year, month) {
 function UpdateData() {
 	var date = new Date();
 	var day = date.getDay();
-	console.log(day, days[day]);
 	var minutes = ZeroBelow(String(date.getMinutes()));
 
 	var curTime = Number(String(date.getHours()) + minutes);
@@ -45,8 +44,6 @@ function UpdateData() {
 	var prevMonthDate = new Date(`${date.getFullYear()}-${date.getMonth()}-01`);
 	var curMonthDate = new Date(`${date.getFullYear()}-${date.getMonth() + 1}-01`);
 	var nextMonthDate = new Date(`${date.getFullYear()}-${date.getMonth() + 2}-01`);
-
-	console.log(curMonthDate.getMonth());
 
 	var prevMonthDaysUI = prevMonthDays + daysi[prevMonthDate.getDay()];
 	var curMonthDaysUI = curMonthDays + daysi[curMonthDate.getDay()];
@@ -90,27 +87,48 @@ function UpdateData() {
 		}
 		week += "</tr>";
 		$("#prevMonthCalendar").append(week);
-		// console.log(week);
 	}
 
 	for(var i = 0; i < Math.ceil(curMonthDaysUI / 7); i++) {
 		var week = "<tr>";
 		if(i == 0) {
 			for(var ii = 1; ii < daysi[curMonthDate.getDay()]; ii++) {
-				week += "<td></td>";	
+				week += "<td></td>";
 			}
 			for(var ii = daysi[curMonthDate.getDay()]; ii <= 7; ii++) {
 				if(ii == 6 || ii == 7) {
-					week += `<td class="has-text-danger">${curMonthLastDay}</td>`;
+					if(date.getDate() == curMonthLastDay) {
+						week += `<td class="has-text-danger is-selected">${curMonthLastDay}</td>`;
+					} else {
+						week += `<td class="has-text-danger">${curMonthLastDay}</td>`;
+					}
+					
 				} else {
-					week += `<td>${curMonthLastDay}</td>`;
+					if(date.getDate() == curMonthLastDay) {
+						week += `<td class="is-selected">${curMonthLastDay}</td>`;
+					} else {
+						week += `<td>${curMonthLastDay}</td>`;
+					}
+					
 				}
 				curMonthLastDay++;
 			}
 		} else {
 			for(var ii = 1; ii <= 7; ii++) {
 				if(curMonthLastDay <= curMonthDays) {
-					week += `<td>${curMonthLastDay}</td>`;
+					if(ii == 6 || ii == 7) {
+						if(date.getDate() == curMonthLastDay) {
+							week += `<td class="is-selected has-text-danger">${curMonthLastDay}</td>`;
+						} else {
+							week += `<td class="has-text-danger">${curMonthLastDay}</td>`;
+						}
+					} else {
+						if(date.getDate() == curMonthLastDay) {
+							week += `<td class="is-selected">${curMonthLastDay}</td>`;
+						} else {
+							week += `<td>${curMonthLastDay}</td>`;
+						}
+					}
 				} else {
 					week += `<td></td>`;
 				}
@@ -119,14 +137,13 @@ function UpdateData() {
 		}
 		week += "</tr>";
 		$("#curMonthCalendar").append(week);
-		// console.log(week);
 	}
 
 	for(var i = 0; i < Math.ceil(nextMonthDaysUI / 7); i++) {
 		var week = "<tr>";
 		if(i == 0) {
 			for(var ii = 1; ii < daysi[nextMonthDate.getDay()]; ii++) {
-				week += "<td></td>";	
+				week += "<td></td>";
 			}
 			for(var ii = daysi[nextMonthDate.getDay()]; ii <= 7; ii++) {
 				if(ii == 6 || ii == 7) {
@@ -139,7 +156,11 @@ function UpdateData() {
 		} else {
 			for(var ii = 1; ii <= 7; ii++) {
 				if(nextMonthLastDay <= nextMonthDays) {
-					week += `<td>${nextMonthLastDay}</td>`;
+					if(ii == 6 || ii == 7) {
+						week += `<td class="has-text-danger">${nextMonthLastDay}</td>`;
+					} else {
+						week += `<td>${nextMonthLastDay}</td>`;
+					}
 				} else {
 					week += `<td></td>`;
 				}
@@ -148,15 +169,7 @@ function UpdateData() {
 		}
 		week += "</tr>";
 		$("#nextMonthCalendar").append(week);
-		// console.log(week);
 	}
-
-	// var monthDate = new Date(`${date.getFullYear()}-${date.getMonth()}-01`);
-	// 	if(ii == 0) {
-	// 		for(var ii = 1; ii < daysi[monthDate.getDay()i++) {
-				
-	// 		}
-	// 	}
 }
 
 $(document).ready(function() {
