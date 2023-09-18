@@ -11,13 +11,16 @@
 </head>
 <body>
   <div class="container py-4">
-    <center>
-      <div class="box">
-        <p class="title is-2" id="currentTime">Подсчёт...</p>
-        <p class="title is-1">Текущий урок:</p>
-        <p class="title is-1" id="currentLesson">Подсчёт...</p>
+    <div class="box">
+      <p class="title is-2 has-text-centered" id="currentTime">Подсчёт...</p>
+      <p class="title is-1 has-text-centered">Текущий урок:<br><span id="currentLesson">Подсчёт...</span></p>
+      <div class="columns" id="lessonProgress" style="display: none;">
+        <div class="column has-text-centered is-size-3" id="lessonBegin">8:25</div>
+        <div class="column is-four-fifths"><progress class="progress is-large is-success p-auto"></progress></div>
+        <div class="column has-text-centered is-size-3" id="lessonEnd">9:10</div>
       </div>
-    </center>
+      
+    </div>
     <p class='pt-3'></p>
     <div class="box">
       <div class="columns">

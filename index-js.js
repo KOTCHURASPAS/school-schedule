@@ -1,4 +1,4 @@
-var curDate = '2023, September, 04 09:05:00';
+var curDate = '2023, September, 04 09:54:59';
 
 function ZeroBelow(chislo) {
 	chislo = String(chislo)
@@ -19,15 +19,26 @@ function UpdateData() {
 
 	var curTime = Number(String(date.getHours()) + minutes);
 
+	var foundLessin = false;
+
 	for(let k in zvonki[days[day]]) {
 		var range = zvonki[days[day]][k];
 
 		if(curTime >= range.begin && curTime <= range.end) {
 			$("#currentLesson").text(k);
+			$("#lessonProgress").fadeIn("fast");
+			$("#lessonProgress progress").attr("max", (range.end - range.begin + 1) * 60);
+			$("#lessonProgress progress").attr("value", (curTime - range.begin) * 60 + date.getSeconds());
+			$("#lessonBegin").text(String(range.begin).replace(/(..)$/, ":$1"));
+			$("#lessonEnd").text(String(range.end + 1).replace(/(..)$/, ":$1"));
+			foundLessin = true;
 			break;
 		}
+	}
 
+	if(!foundLessin) {
 		$("#currentLesson").text("Уроки закончились =)");
+		$("#lessonProgress").fadeOut("fast");
 	}
 
 	$("#currentTime").html(days[day] + "<br>" + date.getFullYear() + "-" + ZeroBelow(date.getMonth() + 1) + "-" + ZeroBelow(date.getDate()) + " " + date.getHours());
