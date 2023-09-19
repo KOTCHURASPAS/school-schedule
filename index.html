@@ -15,9 +15,9 @@
       <p class="title is-2 has-text-centered" id="currentTime">Подсчёт...</p>
       <p class="title is-1 has-text-centered" id="currentLesson">Подсчёт...</p>
       <div class="columns" id="lessonProgress" style="display: none;">
-        <div class="column has-text-centered is-size-3" id="lessonBegin">8:25</div>
-        <div class="column is-four-fifths"><progress class="progress is-large is-success p-auto"></progress></div>
-        <div class="column has-text-centered is-size-3" id="lessonEnd">9:10</div>
+        <div class="column has-text-centered is-size-3" id="lessonBegin">00:00</div>
+        <div class="column is-three-quarters"><progress class="progress is-large is-success p-auto"></progress></div>
+        <div class="column has-text-centered is-size-3" id="lessonEnd">00:00</div>
       </div>
       
     </div>
@@ -25,55 +25,61 @@
     <div class="box">
       <div class="columns">
         <div class="column">
-          <p class="title is-5 has-text-centered" id="prevMonthName">Подсчёт...</p>
-          <table class='table is-striped is-fullwidth is-bordered has-text-centered'>
-            <thead>
-              <tr>
-                <th>Пн</th>
-                <th>Вт</th>
-                <th>Ср</th>
-                <th>Чт</th>
-                <th>Пт</th>
-                <th class="has-text-danger">Сб</th>
-                <th class="has-text-danger">Вс</th>
-              </tr>
-            </thead>
-            <tbody id="prevMonthCalendar"></tbody>
-          </table>
+          <p class="title is-3 has-text-centered" id="prevMonthName">Подсчёт...</p>
+          <div class="table-container">
+            <table class='table is-striped is-fullwidth is-bordered has-text-centered is-size-5'>
+              <thead>
+                <tr>
+                  <th class="has-text-centered">Пн</th>
+                  <th class="has-text-centered">Вт</th>
+                  <th class="has-text-centered">Ср</th>
+                  <th class="has-text-centered">Чт</th>
+                  <th class="has-text-centered">Пт</th>
+                  <th class="has-text-centered has-text-danger">Сб</th>
+                  <th class="has-text-centered has-text-danger">Вс</th>
+                </tr>
+              </thead>
+              <tbody id="prevMonthCalendar"></tbody>
+            </table>
+          </div>
         </div>
         <div class="column">
-          <p class="title is-5 has-text-centered" id="curMonthName">Подсчёт...</p>
-          <table class='table is-striped is-fullwidth is-bordered has-text-centered'>
-            <thead>
-              <tr>
-                <th>Пн</th>
-                <th>Вт</th>
-                <th>Ср</th>
-                <th>Чт</th>
-                <th>Пт</th>
-                <th class="has-text-danger">Сб</th>
-                <th class="has-text-danger">Вс</th>
-              </tr>
-            </thead>
-            <tbody id="curMonthCalendar"></tbody>
-          </table>
+          <p class="title is-3 has-text-centered" id="curMonthName">Подсчёт...</p>
+          <div class="table-container">
+            <table class='table is-striped is-fullwidth is-bordered has-text-centered is-size-5'>
+              <thead>
+                <tr>
+                  <th class="has-text-centered">Пн</th>
+                  <th class="has-text-centered">Вт</th>
+                  <th class="has-text-centered">Ср</th>
+                  <th class="has-text-centered">Чт</th>
+                  <th class="has-text-centered">Пт</th>
+                  <th class="has-text-centered has-text-danger">Сб</th>
+                  <th class="has-text-centered has-text-danger">Вс</th>
+                </tr>
+              </thead>
+              <tbody id="curMonthCalendar"></tbody>
+            </table>
+          </div>
         </div>
         <div class="column">
-          <p class="title is-5 has-text-centered" id="nextMonthName">Подсчёт...</p>
-          <table class='table is-striped is-fullwidth is-bordered has-text-centered'>
-            <thead>
-              <tr>
-                <th>Пн</th>
-                <th>Вт</th>
-                <th>Ср</th>
-                <th>Чт</th>
-                <th>Пт</th>
-                <th class="has-text-danger">Сб</th>
-                <th class="has-text-danger">Вс</th>
-              </tr>
-            </thead>
-            <tbody id="nextMonthCalendar"></tbody>
-          </table>
+          <p class="title is-3 has-text-centered" id="nextMonthName">Подсчёт...</p>
+          <div class="table-container">
+            <table class='table is-striped is-fullwidth is-bordered has-text-centered is-size-5'>
+              <thead>
+                <tr>
+                  <th class="has-text-centered">Пн</th>
+                  <th class="has-text-centered">Вт</th>
+                  <th class="has-text-centered">Ср</th>
+                  <th class="has-text-centered">Чт</th>
+                  <th class="has-text-centered">Пт</th>
+                  <th class="has-text-centered has-text-danger">Сб</th>
+                  <th class="has-text-centered has-text-danger">Вс</th>
+                </tr>
+              </thead>
+              <tbody id="nextMonthCalendar"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

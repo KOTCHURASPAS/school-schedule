@@ -1,4 +1,4 @@
-var curDate = '2023, September, 04 09:54:59';
+var curDate = '2023, September, 19 15:55:00';
 
 function ZeroBelow(chislo) {
 	chislo = String(chislo)
@@ -13,7 +13,7 @@ function daysInMonth(year, month) {
 }
 
 function UpdateData() {
-	var date = new Date();
+	var date = new Date(curDate);
 	var day = date.getDay();
 	var minutes = ZeroBelow(String(date.getMinutes()));
 
@@ -30,7 +30,12 @@ function UpdateData() {
 			$("#lessonProgress progress").attr("max", (range.end - range.begin + 1) * 60);
 			$("#lessonProgress progress").attr("value", (curTime - range.begin) * 60 + date.getSeconds());
 			$("#lessonBegin").text(String(range.begin).replace(/(..)$/, ":$1"));
-			$("#lessonEnd").text(String(range.end + 1).replace(/(..)$/, ":$1"));
+			if(String(range.end).includes("59")) {
+				var endText = String(range.end).replace(/(..)$/, ":$1").split(":");
+				$("#lessonEnd").text(String(Number(endText[0]) + 1) + ":00");
+			} else {
+				$("#lessonEnd").text(String(range.end + 1).replace(/(..)$/, ":$1"));
+			}
 			foundLessin = true;
 			break;
 		}
@@ -44,6 +49,7 @@ function UpdateData() {
 	$("#currentTime").html(days[day] + "<br>" + date.getFullYear() + "-" + ZeroBelow(date.getMonth() + 1) + "-" + ZeroBelow(date.getDate()) + " " + date.getHours());
 	$("#currentTime").html(`${days[day]}<br>${date.getFullYear()}-${ZeroBelow(date.getMonth() + 1)}-${ZeroBelow(date.getDate())} ${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
 
+	var prevprevMonthDays = daysInMonth(date.getFullYear(), date.getMonth() - 1);
 	var prevMonthDays = daysInMonth(date.getFullYear(), date.getMonth());
 	var curMonthDays = daysInMonth(date.getFullYear(), date.getMonth() + 1);
 	var nextMonthDays = daysInMonth(date.getFullYear(), date.getMonth() + 2);
@@ -69,10 +75,11 @@ function UpdateData() {
 	$("#nextMonthName").text(months[nextMonthDate.getMonth()]);
 
 	for(var i = 0; i < Math.ceil(prevMonthDaysUI / 7); i++) {
+		var nextMonthDaysGrey = 1;
 		var week = "<tr>";
 		if(i == 0) {
-			for(var ii = 1; ii < daysi[prevMonthDate.getDay()]; ii++) {
-				week += "<td></td>";
+			for(var ii = daysi[prevMonthDate.getDay()] - 2; ii >= 0; ii--) {
+				week += `<td class="has-text-grey-lighter">${prevprevMonthDays - ii}</td>`;
 			}
 			for(var ii = daysi[prevMonthDate.getDay()]; ii <= 7; ii++) {
 				if(ii == 6 || ii == 7) {
@@ -91,7 +98,12 @@ function UpdateData() {
 						week += `<td>${prevMonthLastDay}</td>`;
 					}
 				} else {
-					week += `<td></td>`;
+					if(ii == 6 || ii == 7) {
+						week += `<td class="has-text-danger-light">${nextMonthDaysGrey}</td>`;
+					} else {
+						week += `<td class="has-text-grey-lighter">${nextMonthDaysGrey}</td>`;
+					}
+					nextMonthDaysGrey++;
 				}
 				prevMonthLastDay++;
 			}
@@ -101,10 +113,11 @@ function UpdateData() {
 	}
 
 	for(var i = 0; i < Math.ceil(curMonthDaysUI / 7); i++) {
+		var nextMonthDaysGrey = 1;
 		var week = "<tr>";
 		if(i == 0) {
-			for(var ii = 1; ii < daysi[curMonthDate.getDay()]; ii++) {
-				week += "<td></td>";
+			for(var ii = daysi[curMonthDate.getDay()] - 2; ii >= 0; ii--) {
+				week += `<td class="has-text-grey-lighter">${prevMonthDays - ii}</td>`;
 			}
 			for(var ii = daysi[curMonthDate.getDay()]; ii <= 7; ii++) {
 				if(ii == 6 || ii == 7) {
@@ -120,7 +133,6 @@ function UpdateData() {
 					} else {
 						week += `<td>${curMonthLastDay}</td>`;
 					}
-					
 				}
 				curMonthLastDay++;
 			}
@@ -141,7 +153,12 @@ function UpdateData() {
 						}
 					}
 				} else {
-					week += `<td></td>`;
+					if(ii == 6 || ii == 7) {
+						week += `<td class="has-text-danger-light">${nextMonthDaysGrey}</td>`;
+					} else {
+						week += `<td class="has-text-grey-lighter">${nextMonthDaysGrey}</td>`;
+					}
+					nextMonthDaysGrey++;
 				}
 				curMonthLastDay++;
 			}
@@ -151,10 +168,11 @@ function UpdateData() {
 	}
 
 	for(var i = 0; i < Math.ceil(nextMonthDaysUI / 7); i++) {
+		var nextMonthDaysGrey = 1;
 		var week = "<tr>";
 		if(i == 0) {
-			for(var ii = 1; ii < daysi[nextMonthDate.getDay()]; ii++) {
-				week += "<td></td>";
+			for(var ii = daysi[nextMonthDate.getDay()] - 2; ii >= 0; ii--) {
+				week += `<td class="has-text-grey-lighter">${curMonthDays - ii}</td>`;
 			}
 			for(var ii = daysi[nextMonthDate.getDay()]; ii <= 7; ii++) {
 				if(ii == 6 || ii == 7) {
@@ -173,7 +191,12 @@ function UpdateData() {
 						week += `<td>${nextMonthLastDay}</td>`;
 					}
 				} else {
-					week += `<td></td>`;
+					if(ii == 6 || ii == 7) {
+						week += `<td class="has-text-danger-light">${nextMonthDaysGrey}</td>`;
+					} else {
+						week += `<td class="has-text-grey-lighter">${nextMonthDaysGrey}</td>`;
+					}
+					nextMonthDaysGrey++;
 				}
 				nextMonthLastDay++;
 			}
@@ -187,3 +210,4 @@ $(document).ready(function() {
 	UpdateData();
 	setInterval("UpdateData()", 1000);
 });
+
