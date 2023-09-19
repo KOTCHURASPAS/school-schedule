@@ -172,7 +172,7 @@ function UpdateEveryDay(date) {
 }
 
 function UpdateData() {
-	var date = new Date(curDate);
+	var date = new Date();
 	var day = date.getDay();
 	if(lastDayUpdated != day) {
 		UpdateEveryDay(date);
