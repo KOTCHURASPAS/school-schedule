@@ -231,7 +231,10 @@ function UpdateData() {
 	}
 
 	$("#currentTime").html(days[day] + "<br>" + date.getFullYear() + "-" + ZeroBelow(date.getMonth() + 1) + "-" + ZeroBelow(date.getDate()) + " " + date.getHours());
-	$("#currentTime").html(`${days[day]}<br>${date.getFullYear()}-${ZeroBelow(date.getMonth() + 1)}-${ZeroBelow(date.getDate())} ${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
+	$("#currentTime").html(`
+		${days[day]}, ${ZeroBelow(date.getDate())} ${monthsRP[date.getMonth()]} ${date.getFullYear()}г.
+		<br>
+		${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
 }
 
 $(document).ready(function() {
