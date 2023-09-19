@@ -1,9 +1,10 @@
-var curDate = '2023, September, 19 15:55:00';
+var curDate = "2023-09-18 10:16:30";
+var lastDayUpdated = -1;
 
 function ZeroBelow(chislo) {
 	chislo = String(chislo)
 	if(chislo.length < 2) {
-		chislo = "0" + chislo
+		chislo = "0" + chislo;
 	}
 	return chislo;
 }
@@ -12,43 +13,7 @@ function daysInMonth(year, month) {
   return new Date(year, month, 0).getDate();
 }
 
-function UpdateData() {
-	var date = new Date(curDate);
-	var day = date.getDay();
-	var minutes = ZeroBelow(String(date.getMinutes()));
-
-	var curTime = Number(String(date.getHours()) + minutes);
-
-	var foundLessin = false;
-
-	for(let k in zvonki[days[day]]) {
-		var range = zvonki[days[day]][k];
-
-		if(curTime >= range.begin && curTime <= range.end) {
-			$("#currentLesson").text(k);
-			$("#lessonProgress").fadeIn("fast");
-			$("#lessonProgress progress").attr("max", (range.end - range.begin + 1) * 60);
-			$("#lessonProgress progress").attr("value", (curTime - range.begin) * 60 + date.getSeconds());
-			$("#lessonBegin").text(String(range.begin).replace(/(..)$/, ":$1"));
-			if(String(range.end).includes("59")) {
-				var endText = String(range.end).replace(/(..)$/, ":$1").split(":");
-				$("#lessonEnd").text(String(Number(endText[0]) + 1) + ":00");
-			} else {
-				$("#lessonEnd").text(String(range.end + 1).replace(/(..)$/, ":$1"));
-			}
-			foundLessin = true;
-			break;
-		}
-	}
-
-	if(!foundLessin) {
-		$("#currentLesson").text("Уроки закончились =)");
-		$("#lessonProgress").fadeOut("fast");
-	}
-
-	$("#currentTime").html(days[day] + "<br>" + date.getFullYear() + "-" + ZeroBelow(date.getMonth() + 1) + "-" + ZeroBelow(date.getDate()) + " " + date.getHours());
-	$("#currentTime").html(`${days[day]}<br>${date.getFullYear()}-${ZeroBelow(date.getMonth() + 1)}-${ZeroBelow(date.getDate())} ${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
-
+function UpdateEveryDay(date) {
 	var prevprevMonthDays = daysInMonth(date.getFullYear(), date.getMonth() - 1);
 	var prevMonthDays = daysInMonth(date.getFullYear(), date.getMonth());
 	var curMonthDays = daysInMonth(date.getFullYear(), date.getMonth() + 1);
@@ -204,6 +169,69 @@ function UpdateData() {
 		week += "</tr>";
 		$("#nextMonthCalendar").append(week);
 	}
+}
+
+function UpdateData() {
+	var date = new Date(curDate);
+	var day = date.getDay();
+	if(lastDayUpdated != day) {
+		UpdateEveryDay(date);
+		lastDayUpdated = day;
+	}
+	var minutes = ZeroBelow(String(date.getMinutes()));
+
+	var curTime = Number(String(date.getHours()) + minutes);
+
+	var foundLessin = false;
+
+	$("#allLessons").empty();
+
+	for(let k in zvonki[days[day]]) {
+		var range = zvonki[days[day]][k];
+
+		if(range.show == true) {
+			var lessonBegin = String(range.begin).replace(/(..)$/, ":$1");
+			var lessonEnd = "";
+			if(String(range.end).includes("59")) {
+				var endText = String(range.end).replace(/(..)$/, ":$1").split(":");
+				lessonEnd = String(Number(endText[0]) + 1) + ":00";
+			} else {
+				lessonEnd = String(range.end + 1).replace(/(..)$/, ":$1");
+			}
+
+			var isCurrend = 0;
+
+			if(curTime >= range.begin && curTime <= range.end) {
+				isCurrend = 1;
+			}
+
+
+			$("#allLessons").append(`<div class="column"><div class="has-text-centered is-size-5">${lessonBegin} - ${lessonEnd}</div><progress class="progress is-small is-success" value="${isCurrend}" max="1"></progress><div class="has-text-centered is-size-4">${k}</div></div>`);
+		}
+
+		if(curTime >= range.begin && curTime <= range.end) {
+			$("#currentLesson").text(k);
+			$("#lessonProgress").fadeIn("fast");
+			$("#lessonProgress progress.is-large").attr("max", (range.end - range.begin + 1) * 60);
+			$("#lessonProgress progress.is-large").attr("value", (curTime - range.begin) * 60 + date.getSeconds());
+			$("#lessonBegin").text(String(range.begin).replace(/(..)$/, ":$1"));
+			if(String(range.end).includes("59")) {
+				var endText = String(range.end).replace(/(..)$/, ":$1").split(":");
+				$("#lessonEnd").text(String(Number(endText[0]) + 1) + ":00");
+			} else {
+				$("#lessonEnd").text(String(range.end + 1).replace(/(..)$/, ":$1"));
+			}
+			foundLessin = true;
+		}
+	}
+
+	if(!foundLessin) {
+		$("#currentLesson").text("Уроки закончились =)");
+		$("#lessonProgress").fadeOut("fast");
+	}
+
+	$("#currentTime").html(days[day] + "<br>" + date.getFullYear() + "-" + ZeroBelow(date.getMonth() + 1) + "-" + ZeroBelow(date.getDate()) + " " + date.getHours());
+	$("#currentTime").html(`${days[day]}<br>${date.getFullYear()}-${ZeroBelow(date.getMonth() + 1)}-${ZeroBelow(date.getDate())} ${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
 }
 
 $(document).ready(function() {

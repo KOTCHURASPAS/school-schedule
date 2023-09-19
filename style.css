@@ -6,3 +6,7 @@
 .table td, .table th {
 	padding: 5px;
 }
+
+.progress:not(:last-child) {
+	margin-bottom: 0;
+}
