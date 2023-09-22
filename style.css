@@ -1,10 +1,104 @@
+:root {
+	--bgcolor: #fff;
+	--color: #363636;
+	--table-stripped: #fafafa;
+	--danger-color: #f14668;
+	--boxbg: #fff;
+	--grey: #dbdbdb;
+	--danger-light: hsl(347, 90%, 96%);
+	--table-border: #DBDBDB;
+	--is-selected: #00d1b2;
+	--progress-bg: #EDEDED;
+}
+
+.darkmode {
+	--bgcolor: #141414;
+	--boxbg: #222222;
+	--table-stripped: #404040;
+	--color: #E1E3E6;
+	--danger-color: #cf1a3e;
+	--grey: #424242;
+	--danger-light: hsl(347, 58%, 25%);
+	--table-border: #424242;
+	--is-selected: #397DCC;
+	--progress-bg: #333333;
+}
+
 #lessonProgress progress {
 	margin-top: 1rem;
-	margin-bottom: 1rem;
 }
 
 .progress:not(:last-child) {
 	margin-bottom: 0;
+}
+
+.theme-but:hover, .theme-but:active, .theme-but:focus {
+    color: var(--color);
+    border-color: var(--color);
+}
+
+.button.is-focused:not(:active), .button:focus:not(:active) {
+	box-shadow: none;
+}
+
+.theme-but {
+    background-color: var(--boxbg);
+    color: var(--color);
+    font-size: 1.5rem;
+    position: absolute;
+}
+
+.button.is-rounded.theme-but {
+	padding: 0;
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+
+html {
+	background-color: var(--bgcolor);
+}
+
+.progress::-webkit-progress-bar {
+	background-color: var(--progress-bg);
+}
+
+.text-danger {
+	color: var(--danger-color);
+}
+
+.table td.is-selected, .table th.is-selected {
+	background-color: var(--is-selected);
+}
+
+.box {
+	background-color: var(--boxbg);
+	color: var(--color);
+}
+
+.title {
+	color: var(--color);
+}
+
+.text-danger-light {
+	color: var(--danger-light);
+}
+
+.table td, .table th {
+	border-color: var(--table-border);
+}
+
+.text-grey-lighter {
+	color: var(--grey);
+}
+
+.table {
+	background-color: var(--boxbg);
+	color: var(--color);
+}
+
+.table thead td, .table thead th {
+	color: var(--color);
 }
 
 .table td, .table th {
