@@ -199,13 +199,15 @@ function UpdateData() {
 		timeBegin = timeBegin.getTime();
 		timeEnd = timeEnd.getTime();
 
-		if(range.show == true) {
-			var isCurrend = 0;
-			if(date.getTime() >= timeBegin && date.getTime() <= timeEnd) {
-				isCurrend = 1;
-			}
+		var isCurrend = 0;
+		if(date.getTime() >= timeBegin && date.getTime() <= timeEnd) {
+			isCurrend = 1;
+		}
 
-			$("#allLessons").append(`<div class="column"><div class="has-text-centered is-size-5">${range.begin} - ${range.end}</div><progress class="progress is-small is-success" value="${isCurrend}" max="1"></progress><div class="has-text-centered is-size-3">${k}</div></div>`);
+		if(range.show == true) {
+			$("#allLessons").append(`<div class="column"><div class="has-text-centered is-size-3">${k}</div><progress class="progress is-small is-success" value="${isCurrend}" max="1"></progress><div class="has-text-centered is-size-5">${range.begin} - ${range.end}</div></div>`);
+		} else {
+			$("#allLessons").append(`<div class="column dot"><progress class="progress is-small is-success" value="${isCurrend}" max="1"></div>`);
 		}
 
 		if(date.getTime() >= timeBegin && date.getTime() <= timeEnd) {
@@ -219,11 +221,11 @@ function UpdateData() {
 	}
 
 	if(!foundLessin) {
-		$("#currentLesson").text("Уроки закончились =)");
 		$("#lessonProgress").fadeOut("fast");
 	}
 
 	$("#currentTime").html(`${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
+	
 }
 
 $(document).ready(function() {

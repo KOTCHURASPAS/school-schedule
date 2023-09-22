@@ -22,5 +22,24 @@
 }
 
 .clock {
-	font-size: 8rem;
+	font-size: 10rem;
+}
+
+#allLessons .column:first-child {
+	height: 2rem;
+}
+
+#allLessons .progress {
+	margin: 0;
+}
+
+#allLessons .column.dot {
+	flex: none;
+	padding: 0;
+	padding-top: 3.725rem;
+}
+
+#allLessons .column.dot .progress {
+	width: .75rem;
+	height: .75rem;
 }
