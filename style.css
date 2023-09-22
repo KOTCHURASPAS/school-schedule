@@ -41,6 +41,17 @@
 	box-shadow: none;
 }
 
+.copyright {
+	position: relative;
+}
+
+.copyright a {
+	position: absolute;
+    right: .5rem;
+    font-size: 1.5rem;
+    color: var(--table-border);
+}
+
 .theme-but {
     background-color: var(--boxbg);
     color: var(--color);
