@@ -1,4 +1,3 @@
-var curDate = "2023-09-18 10:16:30";
 var lastDayUpdated = -1;
 
 function ZeroBelow(chislo) {
@@ -180,47 +179,41 @@ function UpdateData() {
 	}
 	var minutes = ZeroBelow(String(date.getMinutes()));
 
-	var curTime = Number(String(date.getHours()) + minutes);
-
 	var foundLessin = false;
 
 	$("#allLessons").empty();
 
 	for(let k in zvonki[days[day]]) {
 		var range = zvonki[days[day]][k];
+		var rangeEnd = range.end.split(":")[0] + ":" + String(Number(range.end.split(":")[1]) - 1);
+		if(String(Number(range.end.split(":")[1]) - 1) == "-1") {
+			rangeEnd = range.end.split(":")[0] + ":00";
+		} else if (String(Number(range.end.split(":")[1]) - 1).length == 1) {
+			rangeEnd = range.end.split(":")[0] + ":0" + String(Number(range.end.split(":")[1]) - 1);
+		}
+
+		var timeBegin = new Date();
+		var timeEnd = new Date();
+		timeBegin.setHours(range.begin.split(":")[0], range.begin.split(":")[1], 0);
+		timeEnd.setHours(range.end.split(":")[0], range.end.split(":")[1], 0);
+		timeBegin = timeBegin.getTime();
+		timeEnd = timeEnd.getTime();
 
 		if(range.show == true) {
-			var lessonBegin = String(range.begin).replace(/(..)$/, ":$1");
-			var lessonEnd = "";
-			if(String(range.end).includes("59")) {
-				var endText = String(range.end).replace(/(..)$/, ":$1").split(":");
-				lessonEnd = String(Number(endText[0]) + 1) + ":00";
-			} else {
-				lessonEnd = String(range.end + 1).replace(/(..)$/, ":$1");
-			}
-
 			var isCurrend = 0;
-
-			if(curTime >= range.begin && curTime <= range.end) {
+			if(date.getTime() >= timeBegin && date.getTime() <= timeEnd) {
 				isCurrend = 1;
 			}
 
-
-			$("#allLessons").append(`<div class="column"><div class="has-text-centered is-size-5">${lessonBegin} - ${lessonEnd}</div><progress class="progress is-small is-success" value="${isCurrend}" max="1"></progress><div class="has-text-centered is-size-4">${k}</div></div>`);
+			$("#allLessons").append(`<div class="column"><div class="has-text-centered is-size-5">${range.begin} - ${range.end}</div><progress class="progress is-small is-success" value="${isCurrend}" max="1"></progress><div class="has-text-centered is-size-3">${k}</div></div>`);
 		}
 
-		if(curTime >= range.begin && curTime <= range.end) {
-			$("#currentLesson").text(k);
+		if(date.getTime() >= timeBegin && date.getTime() <= timeEnd) {
 			$("#lessonProgress").fadeIn("fast");
-			$("#lessonProgress progress.is-large").attr("max", (range.end - range.begin + 1) * 60);
-			$("#lessonProgress progress.is-large").attr("value", (curTime - range.begin) * 60 + date.getSeconds());
-			$("#lessonBegin").text(String(range.begin).replace(/(..)$/, ":$1"));
-			if(String(range.end).includes("59")) {
-				var endText = String(range.end).replace(/(..)$/, ":$1").split(":");
-				$("#lessonEnd").text(String(Number(endText[0]) + 1) + ":00");
-			} else {
-				$("#lessonEnd").text(String(range.end + 1).replace(/(..)$/, ":$1"));
-			}
+			$("#lessonProgress progress.is-large").attr("max", Math.round((timeEnd - timeBegin) / 1000));
+			$("#lessonProgress progress.is-large").attr("value", (date.getTime() - timeBegin) / 1000 + date.getSeconds());
+			$("#lessonBegin").text(range.begin);
+			$("#lessonEnd").text(range.end);
 			foundLessin = true;
 		}
 	}
@@ -230,11 +223,7 @@ function UpdateData() {
 		$("#lessonProgress").fadeOut("fast");
 	}
 
-	$("#currentTime").html(days[day] + "<br>" + date.getFullYear() + "-" + ZeroBelow(date.getMonth() + 1) + "-" + ZeroBelow(date.getDate()) + " " + date.getHours());
-	$("#currentTime").html(`
-		${days[day]}, ${ZeroBelow(date.getDate())} ${monthsRP[date.getMonth()]} ${date.getFullYear()}г.
-		<br>
-		${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
+	$("#currentTime").html(`${ZeroBelow(date.getHours())}:${ZeroBelow(date.getMinutes())}:${ZeroBelow(date.getSeconds())}`);
 }
 
 $(document).ready(function() {
