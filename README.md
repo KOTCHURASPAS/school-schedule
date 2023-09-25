@@ -1,6 +1,4 @@
 # school-schedule
 School scedule.
-![image](https://github.com/KOTCHURASPAS/school-schedule/assets/93768067/ebeb3a67-66dd-43b7-bc85-468311f87231)
-![image](https://github.com/KOTCHURASPAS/school-schedule/assets/93768067/bba25f23-73b0-4b82-9c15-2251f1007795)
-![image](https://github.com/KOTCHURASPAS/school-schedule/assets/93768067/1ba970a8-6ca7-429b-b126-69ae7248a9b4)
-![image](https://github.com/KOTCHURASPAS/school-schedule/assets/93768067/0d280592-a21c-4a61-8733-e010a0660aa5)
+![image](https://github.com/KOTCHURASPAS/school-schedule/assets/93768067/ddf3b49f-dd3c-43f9-a4cc-8f66b2dfb4da)
+![image](https://github.com/KOTCHURASPAS/school-schedule/assets/93768067/94bcf0d6-7c2f-43b0-83a4-96443d91ff38)
