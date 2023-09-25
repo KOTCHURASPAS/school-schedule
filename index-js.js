@@ -196,11 +196,12 @@ function UpdateData() {
 		var timeEnd = new Date();
 		timeBegin.setHours(range.begin.split(":")[0], range.begin.split(":")[1], 0);
 		timeEnd.setHours(range.end.split(":")[0], range.end.split(":")[1], 0);
-		timeBegin = timeBegin.getTime();
-		timeEnd = timeEnd.getTime();
+		timeBegin = Math.floor(timeBegin.getTime() / 1000);
+		timeEnd = Math.floor(timeEnd.getTime() / 1000);
+		currentTime = Math.floor(date.getTime() / 1000);
 
 		var isCurrend = 0;
-		if(date.getTime() >= timeBegin && date.getTime() <= timeEnd) {
+		if(currentTime >= timeBegin && currentTime <= timeEnd) {
 			isCurrend = 1;
 		}
 
@@ -210,10 +211,10 @@ function UpdateData() {
 			$("#allLessons").append(`<div class="column dot"><progress class="progress is-small is-success" value="${isCurrend}" max="1"></div>`);
 		}
 
-		if(date.getTime() >= timeBegin && date.getTime() <= timeEnd) {
+		if(currentTime >= timeBegin && currentTime <= timeEnd) {
 			$("#lessonProgress").fadeIn("fast");
-			$("#lessonProgress progress.is-large").attr("max", Math.round((timeEnd - timeBegin) / 1000));
-			$("#lessonProgress progress.is-large").attr("value", (date.getTime() - timeBegin) / 1000 + date.getSeconds());
+			$("#lessonProgress progress.is-large").attr("max", timeEnd - timeBegin);
+			$("#lessonProgress progress.is-large").attr("value", currentTime - timeBegin);
 			$("#lessonBegin").text(range.begin);
 			$("#lessonEnd").text(range.end);
 			foundLessin = true;
