@@ -148,3 +148,7 @@ html {
 	width: .75rem;
 	height: .75rem;
 }
+
+::-webkit-scrollbar {
+    	display: none;
+}
