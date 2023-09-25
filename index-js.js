@@ -205,7 +205,7 @@ function UpdateData() {
 		}
 
 		if(range.show == true) {
-			$("#allLessons").append(`<div class="column"><div class="has-text-centered is-size-3">${k}</div><progress class="progress is-small is-success" value="${isCurrend}" max="1"></progress><div class="has-text-centered is-size-5">${range.begin}<br>${range.end}</div></div>`);
+			$("#allLessons").append(`<div class="column"><div class="has-text-centered is-size-3">${range.title}</div><progress class="progress is-small is-success" value="${isCurrend}" max="1"></progress><div class="has-text-centered is-size-5">${range.begin}<br>${range.end}</div></div>`);
 		} else {
 			$("#allLessons").append(`<div class="column dot"><progress class="progress is-small is-success" value="${isCurrend}" max="1"></div>`);
 		}
