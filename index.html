@@ -1,12 +1,56 @@
+<script>
+var zvonki = {};
+
+zvonki["Понедельник"] = [
+	{"title":"1","begin":"8:25","end":"9:05","show":true},
+	{"begin":"9:05","end":"9:15"},
+	{"title":"2","begin":"9:15","end":"9:55","show":true},
+	{"begin":"9:55","end":"10:05"},
+	{"title":"3","begin":"10:05","end":"10:45","show":true},
+	{"begin":"10:45","end":"11:05"},
+	{"title":"4","begin":"11:05","end":"11:45","show":true},
+	{"begin":"11:45","end":"12:05"},
+	{"title":"5","begin":"12:05","end":"12:45","show":true},
+	{"begin":"12:45","end":"13:00"},
+	{"title":"6","begin":"13:00","end":"13:40","show":true},
+	{"begin":"13:40","end":"13:50"},
+	{"title":"7","begin":"13:50","end":"14:30","show":true},
+	{"begin":"14:30","end":"14:35"},
+	{"title":"8","begin":"14:35","end":"15:15","show":true},
+];
+
+zvonki["Вторник"] = [
+	{"title":"1","begin":"8:25","end":"9:10","show":true},
+	{"begin":"9:10","end":"9:20"},
+	{"title":"2","begin":"9:20","end":"10:05","show":true},
+	{"begin":"10:05","end":"10:15"},
+	{"title":"3","begin":"10:15","end":"11:00","show":true},
+	{"begin":"11:00","end":"11:20"},
+	{"title":"4","begin":"11:20","end":"12:05","show":true},
+	{"begin":"12:05","end":"12:25"},
+	{"title":"5","begin":"12:25","end":"13:10","show":true},
+	{"begin":"13:10","end":"13:25"},
+	{"title":"6","begin":"13:25","end":"14:10","show":true},
+	{"begin":"14:10","end":"14:20"},
+	{"title":"7","begin":"14:20","end":"15:05","show":true},
+	{"begin":"15:05","end":"15:15"},
+	{"title":"8","begin":"15:15","end":"16:00","show":true},
+];
+
+zvonki['Четверг'] = zvonki['Понедельник'];
+zvonki['Среда'] = zvonki['Вторник'];
+zvonki['Пятница'] = zvonki['Вторник'];
+</script>
+
 <!doctype html>
 <html lang="ru" class="darkmode">
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="logo.png" type="image/x-icon">
   <title>ШКОЛЬНОЕ РАСПИСАНИЕ</title>
   <link rel="stylesheet" href="bulma.css">
   <link rel="stylesheet" href="style.css">
   <script src="jquery.js"></script>
-  <script src="data.js"></script>
   <script src="index-js.js"></script>
 </head>
 <body>
@@ -15,6 +59,7 @@
       <button class="button theme-but is-rounded" id="themeBut"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/></svg></button>
       <p class="title clock has-text-centered" id="currentTime">Подсчёт...</p>
       <div id="lessonProgress" style="display: none;">
+				<p class="has-text-centered is-size-2" id="lessonRange"></p>
         <div class="columns">
           <div class="column has-text-centered is-size-3" id="lessonBegin">00:00</div>
           <div class="column is-three-quarters"><progress class="progress is-large is-success"></progress></div>
@@ -85,9 +130,9 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="copyright">
-    <a href="https://vk.com/kotchuraspas" target="_blank">#KOTCHURASPAS</a>
+    <div class="copyright">
+      <a href="https://vk.com/kotchuraspas" target="_blank">#KOTCHURASPAS</a>
+    </div>
   </div>
 </body>
 </html>

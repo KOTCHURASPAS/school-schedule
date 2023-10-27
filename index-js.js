@@ -1,3 +1,7 @@
+var days = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+var daysi = [7,1,2,3,4,5,6];
+var months = ["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+var monthsRP = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
 var lastDayUpdated = -1;
 
 function ZeroBelow(chislo) {
@@ -179,7 +183,7 @@ function UpdateData() {
 	}
 	var minutes = ZeroBelow(String(date.getMinutes()));
 
-	var foundLessin = false;
+	var foundLesson = false;
 
 	$("#allLessons").empty();
 
@@ -215,13 +219,18 @@ function UpdateData() {
 			$("#lessonProgress").fadeIn("fast");
 			$("#lessonProgress progress.is-large").attr("max", timeEnd - timeBegin);
 			$("#lessonProgress progress.is-large").attr("value", currentTime - timeBegin);
-			$("#lessonBegin").text(range.begin);
-			$("#lessonEnd").text(range.end);
-			foundLessin = true;
+			var minutes = Math.floor((currentTime - timeBegin) / 60);
+			var seconds = Math.floor((currentTime - timeBegin)) - (minutes * 60);
+			$("#lessonBegin").html(minutes + ":" + ZeroBelow(seconds));
+			var minutes = Math.floor((timeEnd - currentTime) / 60);
+			var seconds = Math.floor((timeEnd - currentTime)) - (minutes * 60);
+			$("#lessonEnd").html(minutes + ":" + ZeroBelow(seconds));
+			$("#lessonRange").html(range.begin + " - " + range.end)
+			foundLesson = true;
 		}
 	}
 
-	if(!foundLessin) {
+	if(!foundLesson) {
 		$("#lessonProgress").fadeOut("fast");
 	}
 
@@ -231,6 +240,7 @@ function UpdateData() {
 $(document).ready(function() {
 	UpdateData();
 	setInterval("UpdateData()", 1000);
+	setInterval("document.location.reload();", 1800000);
 
 	$("#themeBut").click(function() {
 		$('html').toggleClass("darkmode");
